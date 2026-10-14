@@ -134,6 +134,31 @@ export default function Locator() {
     });
   }, [centers, searchQuery, selectedCity, selectedItemType]);
 
+  const CITY_COORDINATES = {
+    'Mandya': { center: [12.5244, 76.8958], zoom: 13 },
+    'Bangalore': { center: [12.9716, 77.5946], zoom: 12 },
+    'All': { center: [12.75, 77.25], zoom: 9 },
+  };
+
+  const handleCityChange = (newCity) => {
+    setSelectedCity(newCity);
+    setActiveCenter(null);
+
+    // Auto-center map based on chosen city
+    if (CITY_COORDINATES[newCity]) {
+      setMapCenter(CITY_COORDINATES[newCity].center);
+      setMapZoom(CITY_COORDINATES[newCity].zoom);
+    } else {
+      const match = centers.find(
+        (c) => c.city?.toLowerCase() === newCity.toLowerCase() && c.lat && c.lng
+      );
+      if (match) {
+        setMapCenter([match.lat, match.lng]);
+        setMapZoom(13);
+      }
+    }
+  };
+
   const handleCenterSelect = (center) => {
     setActiveCenter(center);
     if (center.lat && center.lng) {
@@ -186,7 +211,7 @@ export default function Locator() {
           <MapPin className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
           <select
             value={selectedCity}
-            onChange={(e) => setSelectedCity(e.target.value)}
+            onChange={(e) => handleCityChange(e.target.value)}
             className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white cursor-pointer"
           >
             {cities.map((city) => (
