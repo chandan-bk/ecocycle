@@ -64,10 +64,10 @@ export default function Locator() {
   const [selectedItemType, setSelectedItemType] = useState('All');
   const [activeCenter, setActiveCenter] = useState(null);
 
-  // Default Center: Bengaluru, India (Silicon Valley of India)
-  const defaultCenter = [12.9716, 77.5946];
+  // Default Center: Mandya, Karnataka, India
+  const defaultCenter = [12.5244, 76.8958];
   const [mapCenter, setMapCenter] = useState(defaultCenter);
-  const [mapZoom, setMapZoom] = useState(12);
+  const [mapZoom, setMapZoom] = useState(13);
 
   // Fetch centers from Supabase
   const fetchCenters = async () => {

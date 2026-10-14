@@ -143,9 +143,9 @@ export default function Admin() {
     setCenterForm({
       name: '',
       address: '',
-      city: 'Bangalore',
-      lat: '',
-      lng: '',
+      city: 'Mandya',
+      lat: '12.5244',
+      lng: '76.8958',
       acceptsStr: 'Smartphones, Laptops, Batteries',
     });
     setIsCenterModalOpen(true);
