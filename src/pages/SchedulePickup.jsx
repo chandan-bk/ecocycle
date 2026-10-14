@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { sendBookingConfirmationEmail } from '../lib/emailService';
 import { Calendar, Package, MapPin, Hash, CheckCircle2, AlertCircle, Loader2, ArrowRight } from 'lucide-react';
 
 /**
@@ -80,6 +81,17 @@ export default function SchedulePickup() {
       ]);
 
       if (error) throw error;
+
+      // Dispatch booking confirmation email to customer
+      if (user.email) {
+        sendBookingConfirmationEmail({
+          toEmail: user.email,
+          itemType: itemType,
+          quantity: parseInt(quantity, 10),
+          pickupDate: pickupDate,
+          address: address.trim(),
+        });
+      }
 
       setSuccess(true);
     } catch (err) {

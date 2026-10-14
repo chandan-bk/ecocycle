@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^5.0.3",
     "@supabase/supabase-js": "^2.49.1",
     "chart.js": "^4.4.8",
     "leaflet": "^1.9.4",

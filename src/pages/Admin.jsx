@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { sendStatusUpdateEmail } from '../lib/emailService';
 import PickupCard from '../components/PickupCard';
 import { 
   ShieldCheck, 
@@ -117,6 +118,8 @@ export default function Admin() {
   // Handle Pickup Status Change
   const handleStatusChange = async (pickupId, newStatus) => {
     setErrorMsg('');
+    const targetPickup = pickups.find((p) => p.id === pickupId);
+
     try {
       const { error } = await supabase
         .from('pickups')
@@ -129,8 +132,27 @@ export default function Admin() {
       setPickups((prev) =>
         prev.map((p) => (p.id === pickupId ? { ...p, status: newStatus } : p))
       );
-      setSuccessMsg(`Pickup status updated to ${newStatus}`);
-      setTimeout(() => setSuccessMsg(''), 3000);
+
+      // Trigger automated email alert to user
+      const userEmail = targetPickup?.profiles?.email;
+      if (userEmail) {
+        sendStatusUpdateEmail({
+          toEmail: userEmail,
+          pickupId: targetPickup.id,
+          itemType: targetPickup.item_type,
+          quantity: targetPickup.quantity,
+          newStatus: newStatus,
+          pickupDate: targetPickup.pickup_date,
+          address: targetPickup.address,
+        });
+      }
+
+      setSuccessMsg(
+        userEmail
+          ? `Status updated to ${newStatus} & email alert dispatched to ${userEmail}!`
+          : `Pickup status updated to ${newStatus}`
+      );
+      setTimeout(() => setSuccessMsg(''), 4000);
     } catch (err) {
       console.error('Error updating status:', err);
       setErrorMsg('Could not update pickup status.');
