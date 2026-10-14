@@ -55,16 +55,33 @@ export default function Admin() {
   const fetchAllPickups = async () => {
     setLoadingPickups(true);
     try {
-      const { data, error } = await supabase
+      // 1. Fetch all pickups
+      const { data: pickupsData, error: pickupError } = await supabase
         .from('pickups')
-        .select(`
-          *,
-          profiles (email)
-        `)
+        .select('*')
         .order('pickup_date', { ascending: false });
 
-      if (error) throw error;
-      setPickups(data || []);
+      if (pickupError) throw pickupError;
+
+      // 2. Fetch profiles to match user emails without schema join restrictions
+      const { data: profilesData } = await supabase
+        .from('profiles')
+        .select('id, email');
+
+      const profileEmailMap = {};
+      (profilesData || []).forEach((p) => {
+        if (p.id) profileEmailMap[p.id] = p.email;
+      });
+
+      // 3. Attach user email to each pickup object
+      const enrichedPickups = (pickupsData || []).map((p) => ({
+        ...p,
+        profiles: {
+          email: profileEmailMap[p.user_id] || 'Registered User',
+        },
+      }));
+
+      setPickups(enrichedPickups);
     } catch (err) {
       console.error('Error fetching admin pickups:', err);
       setErrorMsg('Failed to load pickups list.');
