@@ -258,6 +258,26 @@ export default function Awareness() {
         </div>
       </div>
 
+      {/* Non-Profit Civic Model Clarification */}
+      <div className="bg-slate-50 border-l-4 border-emerald-600 rounded-3xl p-6 sm:p-8 shadow-sm">
+        <div className="flex flex-col sm:flex-row gap-5 items-start">
+          <div className="p-3 bg-emerald-100 text-emerald-800 rounded-2xl shrink-0">
+            <HelpCircle className="w-6 h-6 text-emerald-700" />
+          </div>
+          <div className="space-y-3">
+            <h3 className="text-xl font-bold text-slate-900">
+              FAQ: Why is EcoCycle a Non-Profit Service? Do I Get Paid For My E-Waste?
+            </h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              <strong>No, EcoCycle does not purchase devices for cash.</strong> Commercial re-commerce websites (like Cashify or OLX) only buy working smartphones that they can resell for profit, leaving behind 80% of hazardous e-waste (burnt cables, smashed displays, swollen batteries, dead appliances).
+            </p>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              <strong>EcoCycle operates on a civic utility / NGO aggregation model:</strong> Citizens surrender obsolete or broken devices for <strong>100% free</strong>, and we aggregate these small collections to deliver them in bulk to authorized formal dismantling plants (CPCB/KSPCB certified). This ensures dangerous heavy metals are chemically neutralized rather than poisoned into municipal water or burned in informal open-air scrap yards.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Section 3: Interactive 5-Question Quiz */}
       <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-lg space-y-8">
         

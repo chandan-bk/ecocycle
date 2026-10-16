@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { sendBookingConfirmationEmail } from '../lib/emailService';
-import { Calendar, Package, MapPin, Hash, CheckCircle2, AlertCircle, Loader2, ArrowRight } from 'lucide-react';
+import { Calendar, Package, MapPin, Hash, CheckCircle2, AlertCircle, Loader2, ArrowRight, ShieldCheck } from 'lucide-react';
 
 /**
  * SchedulePickup Page
@@ -157,6 +157,15 @@ export default function SchedulePickup() {
               <span>{errorMessage}</span>
             </div>
           )}
+
+          {/* Civic Model Assurance */}
+          <div className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-start gap-3 text-emerald-900 text-xs sm:text-sm">
+            <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+            <div>
+              <strong className="text-emerald-950 font-bold block mb-0.5">100% Free Civic Service:</strong>
+              As a non-profit community initiative, doorstep pickups are completely free. Obsolete or dead devices are safely collected and routed to CPCB/KSPCB certified recyclers for zero-landfill processing.
+            </div>
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             
