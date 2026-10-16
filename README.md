@@ -56,6 +56,7 @@ EcoCycle is a full-stack, cloud-hosted web application designed to combat electr
 | **Database & Auth** | Supabase (PostgreSQL + RLS) | Free Hobby Tier (No Credit Card) |
 | **Maps & Geospatial** | Leaflet + OpenStreetMap | 100% Free / No API Billing |
 | **Data Visualization** | Chart.js + React-Chartjs-2 | Free / Open Source |
+| **Email Alerts** | EmailJS Browser SDK | Free Tier (200 real emails/mo) |
 | **Icons** | Lucide React | Free / Open Source |
 | **Frontend Hosting** | Vercel | Free Hobby Tier |
 
@@ -93,6 +94,24 @@ EcoCycle is a full-stack, cloud-hosted web application designed to combat electr
 
 ---
 
+## 📬 Automated Real-Time Email Service (EmailJS)
+
+EcoCycle features a decoupled, serverless transactional email notification engine using the **EmailJS Browser SDK** (`src/lib/emailService.js`). Real emails are dispatched through authenticated cloud SMTP relays without running custom backend Node.js daemons.
+
+### Operational Triggers
+1. **Booking Confirmation**: Dispatches an instant receipt containing pickup date, gadget stream, item count, and pickup address when a user schedules a collection.
+2. **Status Triage Notifications**: Dispatches an alert whenever an administrator updates a request status (`Pending` → `Scheduled` → `Collected` → `Cancelled`), routing customers directly back to their personal tracking dashboard (`https://ecocycle-beryl.vercel.app/my-pickups`).
+
+### Dispatched Template Parameters
+- `to_name`, `to_email`, `recipient_email`: Customer identity & destination inbox
+- `pickup_id`: 8-character reference token
+- `item_type`, `quantity`: E-waste stream and unit count
+- `status`, `status_note`: Lifecycle status with user-friendly instructions
+- `pickup_date`, `pickup_address`: Doorstep logistical coordinates
+- `dashboard_url`: Direct dashboard link
+
+---
+
 ## ⚡ Quickstart
 
 1. **Clone or navigate to the project directory**:
@@ -106,10 +125,13 @@ EcoCycle is a full-stack, cloud-hosted web application designed to combat electr
    ```
 
 3. **Configure environment variables**:
-   Create `.env` using `.env.example`:
+   Create a `.env` file in the project root:
    ```env
-   VITE_SUPABASE_URL=https://your-project-id.supabase.co
-   VITE_SUPABASE_ANON_KEY=your-anon-key
+   VITE_SUPABASE_URL=https://anusmzkuuudrtgzgccby.supabase.co
+   VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+   VITE_EMAILJS_SERVICE_ID=service_np1cnlg
+   VITE_EMAILJS_TEMPLATE_ID=template_to9738m
+   VITE_EMAILJS_PUBLIC_KEY=c7znG95LlpIxLgUEm
    ```
 
 4. **Launch development server**:
