@@ -90,7 +90,7 @@ EcoCycle is a full-stack, cloud-hosted web application designed to combat electr
 +-----------------------------------------------------------------------------------+
 ```
 
-*(You can capture real browser screenshots after running `npm run dev` and attach them to your project viva report!)*
+*(You can capture real browser screenshots after running `npm run dev`)*
 
 ---
 
@@ -139,3 +139,9 @@ EcoCycle features a decoupled, serverless transactional email notification engin
    npm run dev
    ```
    Open `http://localhost:5173` in your browser.
+
+---
+
+## 👥 Author
+- **Chandan B K** — 2nd Semester CSE Student
+- Project Repository: [chandan-bk/ecocycle](https://github.com/chandan-bk/ecocycle)
