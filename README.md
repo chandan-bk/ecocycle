@@ -3,7 +3,8 @@
 [![Live Demo](https://img.shields.io/badge/Demo-Live%20on%20Vercel-success?style=for-the-badge&logo=vercel)](https://ecocycle-beryl.vercel.app/)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/chandan-bk/ecocycle)
 
-> **Live Website:** [https://ecocycle-beryl.vercel.app/](https://ecocycle-beryl.vercel.app/)
+> **Live Website:** [https://ecocycle-beryl.vercel.app/](https://ecocycle-beryl.vercel.app/)  
+> **Vanilla Edition:** [https://ecocycle-vanilla.vercel.app/](https://ecocycle-vanilla.vercel.app/) ([GitHub](https://github.com/chandan-bk/ecocycle-vanilla))
 
 EcoCycle is a full-stack, cloud-hosted web application designed to combat electronic waste accumulation. Built with **React (Vite)**, **Supabase**, **Leaflet**, and **Chart.js**, it empowers everyday citizens to schedule doorstep pickups for discarded devices and locate certified e-waste dismantling facilities on an interactive map.
 
