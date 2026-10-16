@@ -4,7 +4,9 @@
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/chandan-bk/ecocycle)
 
 > **Live Website:** [https://ecocycle-beryl.vercel.app/](https://ecocycle-beryl.vercel.app/)  
-> **Vanilla Edition:** [https://ecocycle-vanilla.vercel.app/](https://ecocycle-vanilla.vercel.app/) ([GitHub](https://github.com/chandan-bk/ecocycle-vanilla))
+> **Vanilla Edition:** [https://ecocycle-vanilla.vercel.app/](https://ecocycle-vanilla.vercel.app/) ([GitHub](https://github.com/chandan-bk/ecocycle-vanilla))  
+> **PowerPoint Presentation (.pptx):** [Download EcoCycle_Project_Presentation.pptx](EcoCycle_Project_Presentation.pptx) ([Raw GitHub Download](https://github.com/chandan-bk/ecocycle/raw/main/EcoCycle_Project_Presentation.pptx))  
+> **Interactive Web Presentation:** [https://ecocycle-vanilla.vercel.app/presentation.html](https://ecocycle-vanilla.vercel.app/presentation.html)
 
 EcoCycle is a full-stack, cloud-hosted web application designed to combat electronic waste accumulation. Built with **React (Vite)**, **Supabase**, **Leaflet**, and **Chart.js**, it empowers everyday citizens to schedule doorstep pickups for discarded devices and locate certified e-waste dismantling facilities on an interactive map.
 
@@ -155,3 +157,5 @@ EcoCycle features a decoupled, serverless transactional email notification engin
 - **Program:** 5-Day Skill Development Program · Web Development Foundations (12–16 Oct 2026)
 - **Collaboration:** ExcelR Edtech Pvt. Ltd., Bengaluru
 - **Project Repository:** [chandan-bk/ecocycle](https://github.com/chandan-bk/ecocycle)
+- **PowerPoint Presentation:** [EcoCycle_Project_Presentation.pptx](EcoCycle_Project_Presentation.pptx)
+- **Live Presentation (HTML):** [ecocycle-vanilla.vercel.app/presentation.html](https://ecocycle-vanilla.vercel.app/presentation.html)
