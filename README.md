@@ -143,10 +143,10 @@ EcoCycle features a decoupled, serverless transactional email notification engin
 ---
 
 ## 👥 Project Team & Contributors
-- **Chandan B K** — Lead & Full-Stack Architect (2nd Sem CSE)
-- **Dhanush Gowda R** — Frontend & Leaflet GIS Specialist (2nd Sem CSE)
-- **Dore Prasad C K** — Backend & EmailJS Systems Engineer (2nd Sem CSE)
-- **Gowri Shankar S** — Data Analytics & Environmental Modeling (2nd Sem CSE)
+- **Chandan B K** — Lead & Full-Stack Architect (3rd Sem CSE)
+- **Dhanush Gowda R** — Frontend & Leaflet GIS Specialist (3rd Sem CSE)
+- **Dore Prasad C K** — Backend & EmailJS Systems Engineer (3rd Sem CSE)
+- **Gowri Shankar S** — Data Analytics & Environmental Modeling (3rd Sem CSE)
 
 ### 🏫 Academic & Program Details
 - **Department:** Department of Computer Science & Engineering
