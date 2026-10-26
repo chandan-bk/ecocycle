@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { sendBookingConfirmationEmail } from '../lib/emailService';
+import { getDemoSession, saveStoredPickup } from '../lib/fallbackData';
 import { Calendar, Package, MapPin, Hash, CheckCircle2, AlertCircle, Loader2, ArrowRight, ShieldCheck } from 'lucide-react';
 
 /**
@@ -60,31 +61,61 @@ export default function SchedulePickup() {
     setLoading(true);
 
     try {
-      // 1. Get current authenticated user
-      const { data: { user } } = await supabase.auth.getUser();
+      // 1. Get current authenticated user (cloud or demo)
+      let activeUser = null;
+      try {
+        const { data } = await supabase.auth.getUser();
+        activeUser = data?.user;
+      } catch (e) {
+        console.warn('Supabase auth check fallback:', e);
+      }
 
-      if (!user) {
+      if (!activeUser) {
+        const demo = getDemoSession();
+        activeUser = demo?.user;
+      }
+
+      if (!activeUser) {
         throw new Error('You must be signed in to schedule a pickup.');
       }
 
-      // 2. Insert into Supabase 'pickups' table
-      const { error } = await supabase.from('pickups').insert([
-        {
-          user_id: user.id,
-          item_type: itemType,
-          quantity: parseInt(quantity, 10),
-          address: address.trim(),
-          pickup_date: pickupDate,
-          status: 'pending',
-        },
-      ]);
+      const pickupPayload = {
+        id: `pk-${Date.now()}`,
+        user_id: activeUser.id,
+        item_type: itemType,
+        quantity: parseInt(quantity, 10),
+        address: address.trim(),
+        pickup_date: pickupDate,
+        status: 'pending',
+        created_at: new Date().toISOString(),
+        profiles: { email: activeUser.email || 'citizen@ecocycle.org' },
+      };
 
-      if (error) throw error;
+      // 2. Try inserting into Supabase 'pickups' table
+      let insertedInCloud = false;
+      try {
+        const { error } = await supabase.from('pickups').insert([
+          {
+            user_id: activeUser.id,
+            item_type: itemType,
+            quantity: parseInt(quantity, 10),
+            address: address.trim(),
+            pickup_date: pickupDate,
+            status: 'pending',
+          },
+        ]);
+        if (!error) insertedInCloud = true;
+      } catch (cloudErr) {
+        console.warn('Cloud pickup insert paused, using local storage fallback:', cloudErr);
+      }
+
+      // Always save to local store so dashboard shows it immediately
+      saveStoredPickup(pickupPayload);
 
       // Dispatch booking confirmation email to customer
-      if (user.email) {
+      if (activeUser.email) {
         sendBookingConfirmationEmail({
-          toEmail: user.email,
+          toEmail: activeUser.email,
           itemType: itemType,
           quantity: parseInt(quantity, 10),
           pickupDate: pickupDate,

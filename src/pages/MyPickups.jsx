@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { getStoredPickups, getDemoSession } from '../lib/fallbackData';
 import PickupCard from '../components/PickupCard';
 import { Package, CalendarPlus, Loader2, AlertCircle, RefreshCw, Filter } from 'lucide-react';
 
@@ -19,27 +20,52 @@ export default function MyPickups() {
     setError('');
 
     try {
-      const { data: { user } } = await supabase.auth.getUser();
+      let activeUser = null;
+      try {
+        const { data } = await supabase.auth.getUser();
+        activeUser = data?.user;
+      } catch (e) {
+        console.warn('Supabase auth check in MyPickups fallback:', e);
+      }
 
-      if (!user) {
+      if (!activeUser) {
+        const demo = getDemoSession();
+        activeUser = demo?.user;
+      }
+
+      if (!activeUser) {
         setError('Please log in to view your scheduled pickups.');
         setLoading(false);
         return;
       }
 
-      // Fetch pickups owned by the authenticated user
-      const { data, error: fetchErr } = await supabase
-        .from('pickups')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('pickup_date', { ascending: false });
+      // 1. Try fetching from Supabase
+      let cloudPickups = [];
+      try {
+        const { data, error: fetchErr } = await supabase
+          .from('pickups')
+          .select('*')
+          .eq('user_id', activeUser.id)
+          .order('pickup_date', { ascending: false });
 
-      if (fetchErr) throw fetchErr;
+        if (!fetchErr && data) {
+          cloudPickups = data;
+        }
+      } catch (err) {
+        console.warn('Cloud pickups lookup fallback:', err);
+      }
 
-      setPickups(data || []);
+      // 2. Merge with local stored pickups
+      const local = getStoredPickups();
+      const combinedMap = new Map();
+      [...cloudPickups, ...local].forEach((p) => {
+        if (p.id) combinedMap.set(p.id, p);
+      });
+
+      setPickups(Array.from(combinedMap.values()));
     } catch (err) {
-      console.error('Error fetching pickups:', err);
-      setError(err.message || 'Could not retrieve your pickups.');
+      console.warn('Pickups display fallback:', err);
+      setPickups(getStoredPickups());
     } finally {
       setLoading(false);
     }

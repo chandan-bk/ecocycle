@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { getDemoSession, clearDemoSession } from '../lib/fallbackData';
 import { 
   Recycle, 
   MapPin, 
@@ -29,15 +30,32 @@ export default function Navbar() {
   useEffect(() => {
     // 1. Fetch active session and profile role
     async function getUserData() {
-      const { data: { session } } = await supabase.auth.getSession();
+      const demo = getDemoSession();
+      if (demo?.user) {
+        setUser(demo.user);
+        setRole(demo.role || 'user');
+        return;
+      }
+
+      let session = null;
+      try {
+        const res = await supabase.auth.getSession();
+        session = res.data?.session;
+      } catch (e) {
+        // Fallback gracefully if Supabase paused
+      }
       if (session?.user) {
         setUser(session.user);
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('role')
-          .eq('id', session.user.id)
-          .single();
-        if (profile) setRole(profile.role);
+        try {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('role')
+            .eq('id', session.user.id)
+            .single();
+          if (profile) setRole(profile.role);
+        } catch {
+          setRole('user');
+        }
       } else {
         setUser(null);
         setRole(null);
@@ -50,15 +68,25 @@ export default function Navbar() {
     const { data: authListener } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (session?.user) {
         setUser(session.user);
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('role')
-          .eq('id', session.user.id)
-          .single();
-        if (profile) setRole(profile.role);
+        try {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('role')
+            .eq('id', session.user.id)
+            .single();
+          if (profile) setRole(profile.role);
+        } catch {
+          setRole('user');
+        }
       } else {
-        setUser(null);
-        setRole(null);
+        const demo = getDemoSession();
+        if (demo?.user) {
+          setUser(demo.user);
+          setRole(demo.role || 'user');
+        } else {
+          setUser(null);
+          setRole(null);
+        }
       }
     });
 
@@ -68,7 +96,12 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    clearDemoSession();
+    try {
+      await supabase.auth.signOut();
+    } catch (e) {
+      console.warn('Signout warning:', e);
+    }
     setUser(null);
     setRole(null);
     setMobileMenuOpen(false);

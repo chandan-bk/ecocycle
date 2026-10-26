@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { getDemoSession } from '../lib/fallbackData';
 import { ShieldAlert, Loader2 } from 'lucide-react';
 
 /**
@@ -19,8 +20,23 @@ export default function ProtectedRoute({ children, requiredRole }) {
 
   useEffect(() => {
     async function checkAuth() {
+      // 1. Check local demo session first
+      const demo = getDemoSession();
+      if (demo?.user) {
+        setUser(demo.user);
+        setRole(demo.role || 'user');
+        setLoading(false);
+        return;
+      }
+
       try {
-        const { data: { session } } = await supabase.auth.getSession();
+        let session = null;
+        try {
+          const res = await supabase.auth.getSession();
+          session = res.data?.session;
+        } catch (e) {
+          console.warn('Supabase offline in protected route:', e);
+        }
         
         if (!session?.user) {
           setUser(null);
@@ -32,16 +48,15 @@ export default function ProtectedRoute({ children, requiredRole }) {
         setUser(session.user);
 
         // Fetch user role from public.profiles table
-        const { data: profile, error } = await supabase
-          .from('profiles')
-          .select('role')
-          .eq('id', session.user.id)
-          .single();
+        try {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('role')
+            .eq('id', session.user.id)
+            .single();
 
-        if (!error && profile) {
-          setRole(profile.role);
-        } else {
-          // Default fallback to 'user'
+          setRole(profile?.role || 'user');
+        } catch {
           setRole('user');
         }
       } catch (err) {
@@ -56,9 +71,16 @@ export default function ProtectedRoute({ children, requiredRole }) {
     // Listen for auth state changes (login, logout)
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
       if (!session) {
-        setUser(null);
-        setRole(null);
-        setLoading(false);
+        const demo = getDemoSession();
+        if (demo?.user) {
+          setUser(demo.user);
+          setRole(demo.role || 'user');
+          setLoading(false);
+        } else {
+          setUser(null);
+          setRole(null);
+          setLoading(false);
+        }
       } else {
         setUser(session.user);
       }

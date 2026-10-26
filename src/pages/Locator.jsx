@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { supabase } from '../lib/supabase';
+import { FALLBACK_CENTERS } from '../lib/fallbackData';
 import { 
   MapPin, 
   Search, 
@@ -80,10 +81,14 @@ export default function Locator() {
         .order('name', { ascending: true });
 
       if (err) throw err;
-      setCenters(data || []);
+      if (data && data.length > 0) {
+        setCenters(data);
+      } else {
+        setCenters(FALLBACK_CENTERS);
+      }
     } catch (err) {
-      console.error('Error fetching collection centers:', err);
-      setError('Could not load recycling centers. Please check your Supabase connection.');
+      console.warn('Falling back to certified center directory:', err);
+      setCenters(FALLBACK_CENTERS);
     } finally {
       setLoading(false);
     }

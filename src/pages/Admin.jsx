@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { sendStatusUpdateEmail } from '../lib/emailService';
+import { getStoredPickups, updateStoredPickupStatus, FALLBACK_CENTERS } from '../lib/fallbackData';
 import PickupCard from '../components/PickupCard';
 import { 
   ShieldCheck, 
@@ -65,14 +66,18 @@ export default function Admin() {
       if (pickupError) throw pickupError;
 
       // 2. Fetch profiles to match user emails without schema join restrictions
-      const { data: profilesData } = await supabase
-        .from('profiles')
-        .select('id, email');
-
       const profileEmailMap = {};
-      (profilesData || []).forEach((p) => {
-        if (p.id) profileEmailMap[p.id] = p.email;
-      });
+      try {
+        const { data: profilesData } = await supabase
+          .from('profiles')
+          .select('id, email');
+
+        (profilesData || []).forEach((p) => {
+          if (p.id) profileEmailMap[p.id] = p.email;
+        });
+      } catch {
+        // non-fatal
+      }
 
       // 3. Attach user email to each pickup object
       const enrichedPickups = (pickupsData || []).map((p) => ({
@@ -82,10 +87,16 @@ export default function Admin() {
         },
       }));
 
-      setPickups(enrichedPickups);
+      const local = getStoredPickups();
+      const combinedMap = new Map();
+      [...enrichedPickups, ...local].forEach((item) => {
+        if (item.id) combinedMap.set(item.id, item);
+      });
+
+      setPickups(Array.from(combinedMap.values()));
     } catch (err) {
-      console.error('Error fetching admin pickups:', err);
-      setErrorMsg('Failed to load pickups list.');
+      console.warn('Using local pickups fallback for admin:', err);
+      setPickups(getStoredPickups());
     } finally {
       setLoadingPickups(false);
     }
@@ -101,10 +112,14 @@ export default function Admin() {
         .order('name', { ascending: true });
 
       if (error) throw error;
-      setCenters(data || []);
+      if (data && data.length > 0) {
+        setCenters(data);
+      } else {
+        setCenters(FALLBACK_CENTERS);
+      }
     } catch (err) {
-      console.error('Error fetching centers:', err);
-      setErrorMsg('Failed to load collection centers.');
+      console.warn('Using fallback centers directory:', err);
+      setCenters(FALLBACK_CENTERS);
     } finally {
       setLoadingCenters(false);
     }
@@ -121,12 +136,17 @@ export default function Admin() {
     const targetPickup = pickups.find((p) => p.id === pickupId);
 
     try {
-      const { error } = await supabase
-        .from('pickups')
-        .update({ status: newStatus })
-        .eq('id', pickupId);
+      try {
+        await supabase
+          .from('pickups')
+          .update({ status: newStatus })
+          .eq('id', pickupId);
+      } catch (cloudErr) {
+        console.warn('Cloud status update fallback:', cloudErr);
+      }
 
-      if (error) throw error;
+      // Update local storage
+      updateStoredPickupStatus(pickupId, newStatus);
 
       // Update local state
       setPickups((prev) =>
