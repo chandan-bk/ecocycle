@@ -144,17 +144,7 @@ EcoCycle features a decoupled, serverless transactional email notification engin
    npm install
    ```
 
-3. **Configure environment variables**:
-   Create a `.env` file in the project root:
-   ```env
-   VITE_SUPABASE_URL=https://anusmzkuuudrtgzgccby.supabase.co
-   VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-   VITE_EMAILJS_SERVICE_ID=service_np1cnlg
-   VITE_EMAILJS_TEMPLATE_ID=template_to9738m
-   VITE_EMAILJS_PUBLIC_KEY=c7znG95LlpIxLgUEm
-   ```
-
-4. **Launch development server**:
+3. **Launch development server**:
    ```bash
    npm run dev
    ```
