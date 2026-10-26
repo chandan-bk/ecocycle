@@ -22,7 +22,7 @@ import { Recycle, Heart } from 'lucide-react';
 export default function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-slate-50 text-slate-800">
+      <div className="flex flex-col min-h-screen bg-[#F8FAF8] text-[#1E2922] font-sans antialiased selection:bg-[#E7F3EC] selection:text-[#0F3D2E]">
         
         {/* Navigation Bar */}
         <Navbar />
@@ -69,11 +69,11 @@ export default function App() {
               path="*"
               element={
                 <div className="min-h-[50vh] flex flex-col items-center justify-center text-center p-6 space-y-4">
-                  <h2 className="text-4xl font-black text-slate-800">404</h2>
-                  <p className="text-slate-500">Oops! The page you are looking for does not exist.</p>
+                  <h2 className="text-4xl font-display font-bold text-[#0F3D2E]">404</h2>
+                  <p className="text-[#52665A]">Requested civic route does not exist.</p>
                   <Link
                     to="/"
-                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl transition text-sm"
+                    className="bg-[#0F3D2E] hover:bg-[#1C7C54] text-white font-medium px-5 py-2.5 rounded-lg transition-colors text-sm shadow-[0_1px_2px_rgba(15,61,46,0.06)]"
                   >
                     Return Home
                   </Link>
@@ -84,20 +84,20 @@ export default function App() {
         </main>
 
         {/* Global Footer */}
-        <footer className="bg-white border-t border-slate-200 mt-16 py-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <footer className="bg-white border-t border-[#D6E5DC] mt-16 py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#52665A]">
             <div className="flex items-center gap-2">
-              <div className="p-1.5 bg-emerald-100 text-emerald-700 rounded-lg">
+              <div className="p-1.5 bg-[#E7F3EC] text-[#0F3D2E] rounded-md border border-[#D6E5DC]">
                 <Recycle className="w-4 h-4" />
               </div>
-              <span className="font-bold text-slate-700">EcoCycle Platform</span>
-              <span>— Responsible E-Waste Pickup & Recycler Locator</span>
+              <span className="font-semibold text-[#0F3D2E]">EcoCycle Platform</span>
+              <span className="hidden sm:inline">— Civic E-Waste Aggregation & Certified Facility Registry</span>
             </div>
 
-            <div className="flex items-center gap-1">
-              <span>Built for sustainable cities with</span>
-              <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
-              <span>(Free Tier Architecture)</span>
+            <div className="flex items-center gap-1 font-mono text-xs">
+              <span>Civic Non-Profit Utility</span>
+              <span className="text-[#D6E5DC]">·</span>
+              <span>Zero Commercial Trading</span>
             </div>
           </div>
         </footer>

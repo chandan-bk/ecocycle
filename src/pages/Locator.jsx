@@ -19,7 +19,7 @@ const ecoMarkerIcon = L.divIcon({
   className: 'eco-map-marker',
   html: `
     <div style="
-      background-color: #059669; 
+      background-color: #0F3D2E; 
       color: white; 
       width: 36px; 
       height: 36px; 
@@ -28,9 +28,9 @@ const ecoMarkerIcon = L.divIcon({
       display: flex; 
       align-items: center; 
       justify-content: center; 
-      box-shadow: 0 6px 12px -2px rgba(5, 150, 105, 0.4); 
+      box-shadow: 0 4px 10px rgba(15, 61, 46, 0.35); 
       border: 2px solid #ffffff;">
-      <span style="transform: rotate(45deg); font-size: 16px; font-weight: bold;">♻️</span>
+      <span style="transform: rotate(45deg); font-size: 14px; font-weight: bold;">♻️</span>
     </div>
   `,
   iconSize: [36, 36],
@@ -279,19 +279,19 @@ export default function Locator() {
                   >
                     <Popup className="custom-popup">
                       <div className="p-1 space-y-2 max-w-[240px]">
-                        <h4 className="font-bold text-slate-800 text-sm leading-tight">{center.name}</h4>
-                        <p className="text-xs text-slate-600">{center.address}, {center.city}</p>
+                        <h4 className="font-bold text-[#0F3D2E] text-sm leading-tight">{center.name}</h4>
+                        <p className="text-xs text-[#3F584C]">{center.address}, {center.city}</p>
                         
                         {center.accepts && center.accepts.length > 0 && (
                           <div className="pt-1">
-                            <span className="text-[10px] font-bold text-slate-500 uppercase block mb-1">
+                            <span className="text-xs font-bold text-[#6B8477] uppercase block mb-1">
                               Accepts:
                             </span>
                             <div className="flex flex-wrap gap-1">
                               {center.accepts.map((item, idx) => (
                                 <span
                                   key={idx}
-                                  className="text-[10px] bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded border border-emerald-200"
+                                  className="text-xs bg-[#E8F5EE] text-[#0F3D2E] px-1.5 py-0.5 rounded border border-[#D6E5DC]"
                                 >
                                   {item}
                                 </span>
@@ -300,15 +300,15 @@ export default function Locator() {
                           </div>
                         )}
 
-                        <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
-                          <span className="text-slate-400">
+                        <div className="pt-2 border-t border-[#EDF3EF] flex items-center justify-between text-xs">
+                          <span className="text-[#6B8477]">
                             {center.lat.toFixed(4)}, {center.lng.toFixed(4)}
                           </span>
                           <a
                             href={`https://www.google.com/maps/search/?api=1&query=${center.lat},${center.lng}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-bold text-emerald-600 hover:text-emerald-700 inline-flex items-center gap-1"
+                            className="font-bold text-[#2FA36B] hover:text-[#1C7C54] inline-flex items-center gap-1"
                           >
                             Directions <ExternalLink className="w-3 h-3" />
                           </a>
@@ -325,15 +325,15 @@ export default function Locator() {
         {/* Side List of Centers (4 cols) */}
         <div className="lg:col-span-4 space-y-3">
           <div className="flex items-center justify-between px-1">
-            <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wider">
+            <h2 className="text-xs font-bold text-[#0F3D2E] uppercase tracking-wider">
               Centers Found ({filteredCenters.length})
             </h2>
-            <span className="text-xs text-slate-500">Click to locate on map</span>
+            <span className="text-xs text-[#6B8477]">Click to locate</span>
           </div>
 
           <div className="space-y-3 max-h-[570px] overflow-y-auto pr-1">
             {filteredCenters.length === 0 ? (
-              <div className="bg-white p-8 rounded-2xl border border-slate-200 text-center text-slate-500 text-sm">
+              <div className="bg-white p-8 rounded-xl border border-[#D6E5DC] text-center text-[#3F584C] text-sm">
                 No collection centers match your current filter criteria.
               </div>
             ) : (
@@ -343,21 +343,21 @@ export default function Locator() {
                   <div
                     key={center.id}
                     onClick={() => handleCenterSelect(center)}
-                    className={`p-4 rounded-2xl border cursor-pointer transition duration-150 ${
+                    className={`p-4 rounded-xl border cursor-pointer transition duration-150 ${
                       isSelected
-                        ? 'bg-emerald-50/80 border-emerald-500 ring-2 ring-emerald-400'
-                        : 'bg-white border-slate-200 hover:border-emerald-300 hover:shadow-sm'
+                        ? 'bg-[#E8F5EE] border-[#2FA36B] ring-1 ring-[#2FA36B]'
+                        : 'bg-white border-[#D6E5DC] hover:border-[#B4CFC1]'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-2">
-                      <h3 className="font-bold text-slate-800 text-sm">{center.name}</h3>
-                      <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full shrink-0 font-medium">
+                      <h3 className="font-bold text-[#0F3D2E] text-sm">{center.name}</h3>
+                      <span className="text-xs bg-[#EDF3EF] text-[#3F584C] px-2 py-0.5 rounded-full shrink-0 font-semibold">
                         {center.city}
                       </span>
                     </div>
 
-                    <p className="text-xs text-slate-500 mt-1 flex items-start gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                    <p className="text-xs text-[#3F584C] mt-1 flex items-start gap-1">
+                      <MapPin className="w-3.5 h-3.5 text-[#2FA36B] shrink-0 mt-0.5" />
                       <span>{center.address}</span>
                     </p>
 
@@ -366,13 +366,13 @@ export default function Locator() {
                         {center.accepts.slice(0, 3).map((item, idx) => (
                           <span
                             key={idx}
-                            className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-medium"
+                            className="text-xs bg-[#EDF3EF] text-[#0F3D2E] px-1.5 py-0.5 rounded font-medium"
                           >
                             {item}
                           </span>
                         ))}
                         {center.accepts.length > 3 && (
-                          <span className="text-[10px] text-slate-400 self-center">
+                          <span className="text-xs text-[#6B8477] self-center">
                             +{center.accepts.length - 3} more
                           </span>
                         )}

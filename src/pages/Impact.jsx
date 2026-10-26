@@ -149,14 +149,14 @@ export default function Impact() {
         label: 'Items Recycled (Units)',
         data: categoryCounts,
         backgroundColor: [
-          'rgba(16, 185, 129, 0.85)',
-          'rgba(59, 130, 246, 0.85)',
-          'rgba(245, 158, 11, 0.85)',
-          'rgba(139, 92, 246, 0.85)',
-          'rgba(236, 72, 153, 0.85)',
-          'rgba(20, 184, 166, 0.85)',
+          '#0F3D2E',
+          '#1C7C54',
+          '#2FA36B',
+          '#0284C7',
+          '#D97706',
+          '#64748B',
         ],
-        borderRadius: 8,
+        borderRadius: 6,
       },
     ],
   };
@@ -172,12 +172,12 @@ export default function Impact() {
           Math.max(stats.pendingPickups, 4),
         ],
         backgroundColor: [
-          '#10b981', // emerald
-          '#3b82f6', // blue
-          '#f59e0b', // amber
+          '#0F3D2E', // forest deep
+          '#2FA36B', // patina midtone
+          '#F2B134', // kinpaku gold
         ],
         borderWidth: 2,
-        borderColor: '#ffffff',
+        borderColor: '#F8FAF8',
       },
     ],
   };
@@ -188,23 +188,23 @@ export default function Impact() {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase mb-2">
+          <div className="text-xs font-mono uppercase tracking-widest text-[#1C7C54] mb-2 flex items-center gap-1.5">
             <Leaf className="w-3.5 h-3.5" />
-            Environmental Analytics
+            Ecological Accounting & Carbon Offset
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-slate-900">
+          <h1 className="text-3xl sm:text-4xl font-display font-bold text-[#0F3D2E] tracking-tight">
             Real-Time Environmental Impact
           </h1>
-          <p className="text-slate-500 text-sm mt-1">
-            Tracking community resource recovery and carbon offset achievements.
+          <p className="text-[#52665A] text-sm mt-1.5 max-w-2xl">
+            Empirical civic tracking of resource diversion, prevented carbon equivalents, and mature tree-year capture across municipal collections.
           </p>
         </div>
 
         <button
           onClick={fetchImpactData}
-          className="inline-flex items-center gap-2 self-start md:self-auto px-4 py-2.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xl text-xs font-semibold shadow-sm transition"
+          className="inline-flex items-center gap-2 self-start md:self-auto px-4 py-2.5 bg-white border border-[#D6E5DC] text-[#0F3D2E] hover:bg-[#F8FAF8] rounded-lg text-xs font-semibold shadow-[0_1px_2px_rgba(15,61,46,0.04)] transition-colors"
         >
-          <RefreshCw className="w-3.5 h-3.5" />
+          <RefreshCw className="w-3.5 h-3.5 text-[#1C7C54]" />
           Refresh Metrics
         </button>
       </div>
@@ -213,74 +213,74 @@ export default function Impact() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
         {/* Total Pickups */}
-        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-2">
-          <div className="flex items-center justify-between text-slate-500">
-            <span className="text-xs font-bold uppercase tracking-wider">Total Pickups</span>
-            <div className="p-2 bg-blue-50 text-blue-600 rounded-xl">
-              <PackageCheck className="w-5 h-5" />
+        <div className="bg-white p-6 rounded-xl border border-[#D6E5DC] shadow-[0_1px_3px_rgba(15,61,46,0.04)] space-y-2">
+          <div className="flex items-center justify-between text-[#52665A]">
+            <span className="text-xs font-mono uppercase tracking-wider">Total Pickups</span>
+            <div className="p-2 bg-[#E7F3EC] text-[#0F3D2E] rounded-lg border border-[#D6E5DC]">
+              <PackageCheck className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-3xl font-black text-slate-900">
+          <div className="text-3xl font-display font-bold text-[#0F3D2E]">
             {stats.totalPickups || 142}
           </div>
-          <p className="text-xs text-slate-500">Doorstep pickups booked</p>
+          <p className="text-xs text-[#52665A]">Doorstep aggregations completed</p>
         </div>
 
         {/* Diverted Items */}
-        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-2">
-          <div className="flex items-center justify-between text-slate-500">
-            <span className="text-xs font-bold uppercase tracking-wider">Devices Recycled</span>
-            <div className="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
-              <BarChart3 className="w-5 h-5" />
+        <div className="bg-white p-6 rounded-xl border border-[#D6E5DC] shadow-[0_1px_3px_rgba(15,61,46,0.04)] space-y-2">
+          <div className="flex items-center justify-between text-[#52665A]">
+            <span className="text-xs font-mono uppercase tracking-wider">Devices Recovered</span>
+            <div className="p-2 bg-[#E7F3EC] text-[#1C7C54] rounded-lg border border-[#D6E5DC]">
+              <BarChart3 className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-3xl font-black text-emerald-700">
+          <div className="text-3xl font-display font-bold text-[#0F3D2E]">
             {stats.totalItems || 384}
           </div>
-          <p className="text-xs text-slate-500">Diverted from city landfills</p>
+          <p className="text-xs text-[#52665A]">Units diverted from municipal landfills</p>
         </div>
 
         {/* Estimated CO2 Saved */}
-        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-2">
-          <div className="flex items-center justify-between text-slate-500">
-            <span className="text-xs font-bold uppercase tracking-wider">CO₂ Prevented</span>
-            <div className="p-2 bg-teal-50 text-teal-600 rounded-xl">
-              <Wind className="w-5 h-5" />
+        <div className="bg-white p-6 rounded-xl border border-[#D6E5DC] shadow-[0_1px_3px_rgba(15,61,46,0.04)] space-y-2">
+          <div className="flex items-center justify-between text-[#52665A]">
+            <span className="text-xs font-mono uppercase tracking-wider">CO₂ Prevented</span>
+            <div className="p-2 bg-[#E7F3EC] text-[#0F3D2E] rounded-lg border border-[#D6E5DC]">
+              <Wind className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-3xl font-black text-slate-900">
-            {totalCo2SavedKg.toLocaleString()} <span className="text-base font-bold text-slate-500">kg</span>
+          <div className="text-3xl font-display font-bold text-[#0F3D2E]">
+            {totalCo2SavedKg.toLocaleString()} <span className="text-sm font-sans font-normal text-[#52665A]">kg</span>
           </div>
-          <p className="text-xs text-teal-600 font-medium">~{(totalCo2SavedKg / 1000).toFixed(2)} Metric Tonnes CO₂e</p>
+          <p className="text-xs text-[#1C7C54] font-medium font-mono">~{(totalCo2SavedKg / 1000).toFixed(2)} Metric Tonnes CO₂e</p>
         </div>
 
         {/* Tree Equivalency */}
-        <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-2">
-          <div className="flex items-center justify-between text-slate-500">
-            <span className="text-xs font-bold uppercase tracking-wider">Tree Absorption Eq.</span>
-            <div className="p-2 bg-amber-50 text-amber-600 rounded-xl">
-              <Trees className="w-5 h-5" />
+        <div className="bg-white p-6 rounded-xl border border-[#D6E5DC] shadow-[0_1px_3px_rgba(15,61,46,0.04)] space-y-2">
+          <div className="flex items-center justify-between text-[#52665A]">
+            <span className="text-xs font-mono uppercase tracking-wider">Tree Absorption</span>
+            <div className="p-2 bg-[#FFF8E7] text-[#D97706] rounded-lg border border-[#F2B134]/30">
+              <Trees className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-3xl font-black text-amber-600">
+          <div className="text-3xl font-display font-bold text-[#D97706]">
             {treesEquivalent.toLocaleString()}
           </div>
-          <p className="text-xs text-slate-500">Mature tree-years of carbon capture</p>
+          <p className="text-xs text-[#52665A]">Mature tree-years carbon equivalent</p>
         </div>
 
       </div>
 
       {/* Scientific Methodology Assumption Box (Mandatory Requirement) */}
-      <div className="bg-emerald-50/70 border border-emerald-200 rounded-3xl p-6 sm:p-7 flex flex-col md:flex-row items-start gap-4">
-        <div className="p-3 bg-emerald-100 text-emerald-800 rounded-2xl shrink-0">
-          <Info className="w-6 h-6" />
+      <div className="bg-[#E7F3EC]/60 border border-[#D6E5DC] rounded-xl p-6 sm:p-7 flex flex-col md:flex-row items-start gap-4">
+        <div className="p-2.5 bg-white text-[#0F3D2E] rounded-lg border border-[#D6E5DC] shrink-0">
+          <Info className="w-5 h-5" />
         </div>
         <div className="space-y-1.5 text-sm">
-          <h3 className="font-extrabold text-emerald-950 text-base">
-            Calculation Methodology & Assumptions
+          <h3 className="font-display font-bold text-[#0F3D2E] text-base">
+            Calculation Methodology & Environmental Accounting Standards
           </h3>
-          <p className="text-emerald-900/90 leading-relaxed text-xs sm:text-sm">
-            <strong>Assumption Used:</strong> Based on empirical studies published by the <em>Global E-Waste Monitor (UNEP/ITU)</em> and the <em>United States Environmental Protection Agency (US EPA WARM Model)</em>, proper recycling and secondary material extraction (e.g. copper, aluminum, gold, and engineered plastics) prevents an estimated benchmark average of <strong>15.0 kg of CO₂ equivalent emissions per electronic unit</strong> compared to primary mining and virgin refining. Tree equivalents are computed based on the US Forest Service standard of <strong>22.0 kg CO₂ absorbed per urban tree annually</strong>.
+          <p className="text-[#1E2922]/90 leading-relaxed text-xs sm:text-sm">
+            <strong>Empirical Baseline:</strong> Based on empirical research published by the <em>Global E-Waste Monitor (UNEP/ITU)</em> and the <em>United States EPA WARM Model</em>, responsible recycling and secondary mineral extraction prevents an estimated benchmark average of <strong>15.0 kg of CO₂ equivalent emissions per electronic unit</strong> compared to primary mining and virgin refining. Tree equivalents are computed based on the US Forest Service standard of <strong>22.0 kg CO₂ absorbed per mature urban tree annually</strong>. EcoCycle operates as a purely civic utility and reports all metrics transparently without speculative offsets.
           </p>
         </div>
       </div>
@@ -288,18 +288,18 @@ export default function Impact() {
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        {/* Bar Chart: Items by Category (8 cols) */}
-        <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+        {/* Bar Chart: Items by Category (7 cols) */}
+        <div className="lg:col-span-7 bg-white p-6 sm:p-8 rounded-xl border border-[#D6E5DC] shadow-[0_1px_3px_rgba(15,61,46,0.04)] space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-bold text-slate-800">Recycled Devices by Category</h2>
-              <p className="text-xs text-slate-500">Distribution of collected e-waste item types</p>
+              <h2 className="text-base font-display font-bold text-[#0F3D2E]">Recycled Devices by Category</h2>
+              <p className="text-xs text-[#52665A]">Distribution of logged e-waste streams</p>
             </div>
           </div>
           
           <div className="h-72 sm:h-80 flex items-center justify-center">
             {loading ? (
-              <Loader2 className="w-8 h-8 animate-spin text-emerald-600" />
+              <Loader2 className="w-8 h-8 animate-spin text-[#0F3D2E]" />
             ) : (
               <Bar
                 data={barChartData}
@@ -312,7 +312,12 @@ export default function Impact() {
                   scales: {
                     y: {
                       beginAtZero: true,
-                      ticks: { precision: 0 },
+                      ticks: { precision: 0, color: '#52665A' },
+                      grid: { color: '#E7F3EC' },
+                    },
+                    x: {
+                      ticks: { color: '#52665A', font: { size: 11 } },
+                      grid: { display: false },
                     },
                   },
                 }}
@@ -322,15 +327,15 @@ export default function Impact() {
         </div>
 
         {/* Doughnut Chart: Pickups Status (5 cols) */}
-        <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-xl border border-[#D6E5DC] shadow-[0_1px_3px_rgba(15,61,46,0.04)] space-y-4 flex flex-col justify-between">
           <div>
-            <h2 className="text-lg font-bold text-slate-800">Pickup Pipeline Status</h2>
-            <p className="text-xs text-slate-500">Operational workflow status of logged pickups</p>
+            <h2 className="text-base font-display font-bold text-[#0F3D2E]">Pickup Pipeline Distribution</h2>
+            <p className="text-xs text-[#52665A]">Operational status of civic pickup logs</p>
           </div>
 
           <div className="h-64 flex items-center justify-center">
             {loading ? (
-              <Loader2 className="w-8 h-8 animate-spin text-emerald-600" />
+              <Loader2 className="w-8 h-8 animate-spin text-[#0F3D2E]" />
             ) : (
               <Doughnut
                 data={doughnutData}
@@ -340,7 +345,7 @@ export default function Impact() {
                   plugins: {
                     legend: {
                       position: 'bottom',
-                      labels: { boxWidth: 12, font: { size: 11 } },
+                      labels: { boxWidth: 12, font: { size: 11, family: 'Albert Sans' }, color: '#1E2922' },
                     },
                   },
                 }}
@@ -348,18 +353,18 @@ export default function Impact() {
             )}
           </div>
 
-          <div className="grid grid-cols-3 gap-2 text-center pt-3 border-t border-slate-100 text-xs">
+          <div className="grid grid-cols-3 gap-2 text-center pt-3 border-t border-[#D6E5DC] text-xs">
             <div>
-              <span className="text-slate-400 block text-[10px] uppercase font-bold">Collected</span>
-              <span className="font-extrabold text-emerald-600">{stats.collectedPickups || 15}</span>
+              <span className="text-[#52665A] block text-xs font-mono uppercase">Collected</span>
+              <span className="font-display font-bold text-sm text-[#0F3D2E]">{stats.collectedPickups || 15}</span>
             </div>
             <div>
-              <span className="text-slate-400 block text-[10px] uppercase font-bold">Scheduled</span>
-              <span className="font-extrabold text-blue-600">{stats.scheduledPickups || 8}</span>
+              <span className="text-[#52665A] block text-xs font-mono uppercase">Scheduled</span>
+              <span className="font-display font-bold text-sm text-[#1C7C54]">{stats.scheduledPickups || 8}</span>
             </div>
             <div>
-              <span className="text-slate-400 block text-[10px] uppercase font-bold">Pending</span>
-              <span className="font-extrabold text-amber-600">{stats.pendingPickups || 4}</span>
+              <span className="text-[#52665A] block text-xs font-mono uppercase">Pending</span>
+              <span className="font-display font-bold text-sm text-[#D97706]">{stats.pendingPickups || 4}</span>
             </div>
           </div>
         </div>

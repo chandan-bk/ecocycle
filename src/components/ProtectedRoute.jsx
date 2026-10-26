@@ -71,9 +71,9 @@ export default function ProtectedRoute({ children, requiredRole }) {
 
   if (loading) {
     return (
-      <div className="min-h-[60vh] flex flex-col items-center justify-center text-emerald-700">
-        <Loader2 className="w-10 h-10 animate-spin mb-3" />
-        <p className="text-slate-600 font-medium text-sm">Verifying access privileges...</p>
+      <div className="min-h-[60vh] flex flex-col items-center justify-center text-[#0F3D2E]">
+        <Loader2 className="w-8 h-8 animate-spin mb-3 text-[#0F3D2E]" />
+        <p className="text-[#52665A] font-medium text-xs font-mono">Verifying authorization token...</p>
       </div>
     );
   }
@@ -86,19 +86,19 @@ export default function ProtectedRoute({ children, requiredRole }) {
   // Role requirement check (e.g. admin only)
   if (requiredRole && role !== requiredRole) {
     return (
-      <div className="max-w-md mx-auto my-16 p-8 bg-white border border-rose-200 rounded-2xl shadow-sm text-center">
-        <div className="w-16 h-16 bg-rose-50 text-rose-600 rounded-full flex items-center justify-center mx-auto mb-4">
-          <ShieldAlert className="w-8 h-8" />
+      <div className="max-w-md mx-auto my-16 p-8 bg-white border border-[#D6E5DC] rounded-xl shadow-[0_1px_3px_rgba(15,61,46,0.06)] text-center">
+        <div className="w-12 h-12 bg-rose-50 border border-rose-200 text-rose-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+          <ShieldAlert className="w-6 h-6" />
         </div>
-        <h2 className="text-xl font-bold text-slate-800 mb-2">Admin Access Required</h2>
-        <p className="text-sm text-slate-600 mb-6">
-          This portal is reserved for recycling facility administrators. Your current account role is <span className="font-semibold text-rose-600 uppercase">{role || 'user'}</span>.
+        <h2 className="text-xl font-display font-bold text-[#0F3D2E] mb-2">Administrative Privileges Required</h2>
+        <p className="text-xs text-[#52665A] mb-6 leading-relaxed">
+          This portal is reserved for registered recycling facility operators. Your active authorization role is <span className="font-mono text-rose-600 uppercase font-semibold">{role || 'user'}</span>.
         </p>
         <a
           href="/"
-          className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-5 py-2.5 rounded-xl transition duration-150"
+          className="inline-block bg-[#0F3D2E] hover:bg-[#1C7C54] text-white font-medium px-5 py-2.5 rounded-lg text-xs transition-colors shadow-[0_1px_2px_rgba(15,61,46,0.06)]"
         >
-          Return to Home
+          Return to Public Directory
         </a>
       </div>
     );

@@ -61,35 +61,35 @@ export default function MyPickups() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-black text-slate-900 flex items-center gap-2">
-            <Package className="w-8 h-8 text-emerald-600" />
-            My E-Waste Pickups
+          <h1 className="text-3xl font-extrabold text-[#0F3D2E] flex items-center gap-2.5">
+            <Package className="w-7 h-7 text-[#2FA36B]" />
+            My Collection Requests
           </h1>
-          <p className="text-slate-500 text-sm mt-1">
-            Track the status of all your scheduled doorstep collections.
+          <p className="text-[#3F584C] text-sm mt-1">
+            Real-time status tracking for all your scheduled household pickups.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <button
             onClick={fetchUserPickups}
-            className="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition"
+            className="p-2.5 rounded-lg border border-[#D6E5DC] bg-white hover:bg-[#EDF3EF] text-[#3F584C] transition"
             title="Refresh List"
           >
             <RefreshCw className="w-4 h-4" />
           </button>
           <Link
             to="/schedule"
-            className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl shadow-md shadow-emerald-200 text-sm transition"
+            className="inline-flex items-center gap-2 bg-[#0F3D2E] hover:bg-[#1C7C54] active:scale-[0.98] text-white font-bold px-5 py-2.5 rounded-lg text-sm transition shadow-xs"
           >
-            <CalendarPlus className="w-4 h-4" />
+            <CalendarPlus className="w-4 h-4 text-[#2FA36B]" />
             New Pickup
           </Link>
         </div>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap gap-2 mb-6 border-b border-slate-200 pb-4">
+      <div className="flex flex-wrap gap-2 mb-6 border-b border-[#D6E5DC] pb-4">
         {[
           { label: 'All Requests', val: 'all' },
           { label: 'Pending', val: 'pending' },
@@ -99,10 +99,10 @@ export default function MyPickups() {
           <button
             key={tab.val}
             onClick={() => setFilterStatus(tab.val)}
-            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition ${
+            className={`px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition ${
               filterStatus === tab.val
-                ? 'bg-emerald-600 text-white shadow-sm'
-                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                ? 'bg-[#0F3D2E] text-white'
+                : 'bg-white text-[#3F584C] border border-[#D6E5DC] hover:bg-[#EDF3EF]'
             }`}
           >
             {tab.label}
@@ -112,38 +112,38 @@ export default function MyPickups() {
 
       {/* Error state */}
       {error && (
-        <div className="p-4 mb-6 rounded-2xl bg-rose-50 border border-rose-200 flex items-start gap-3 text-rose-700 text-sm">
-          <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+        <div className="p-4 mb-6 rounded-xl bg-[#FEE2E2] border border-[#FECACA] flex items-start gap-3 text-[#991B1B] text-sm">
+          <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-[#DC2626]" />
           <span>{error}</span>
         </div>
       )}
 
       {/* Loading state */}
       {loading ? (
-        <div className="min-h-[40vh] flex flex-col items-center justify-center text-emerald-700">
-          <Loader2 className="w-8 h-8 animate-spin mb-3" />
-          <p className="text-slate-500 font-medium text-sm">Loading your pickup requests...</p>
+        <div className="min-h-[40vh] flex flex-col items-center justify-center text-[#0F3D2E]">
+          <Loader2 className="w-8 h-8 animate-spin mb-3 text-[#2FA36B]" />
+          <p className="text-[#3F584C] font-medium text-sm">Retrieving collection records...</p>
         </div>
       ) : filteredPickups.length === 0 ? (
         /* Empty State */
-        <div className="bg-white rounded-3xl border border-dashed border-slate-300 p-12 text-center max-w-md mx-auto my-6 space-y-4">
-          <div className="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto">
-            <Package className="w-8 h-8" />
+        <div className="bg-white rounded-2xl border border-[#D6E5DC] p-12 text-center max-w-md mx-auto my-6 space-y-4 shadow-xs">
+          <div className="w-14 h-14 bg-[#EDF3EF] text-[#3F584C] rounded-full flex items-center justify-center mx-auto">
+            <Package className="w-7 h-7 text-[#2FA36B]" />
           </div>
-          <h3 className="text-lg font-bold text-slate-800">
+          <h3 className="text-lg font-bold text-[#0F3D2E]">
             {filterStatus === 'all'
               ? 'No Pickups Scheduled Yet'
               : `No ${filterStatus} pickups found`}
           </h3>
-          <p className="text-sm text-slate-500">
+          <p className="text-xs sm:text-sm text-[#3F584C] leading-relaxed">
             Have old smartphones, monitors, or batteries at home? Schedule a free collection today.
           </p>
-          <div>
+          <div className="pt-2">
             <Link
               to="/schedule"
-              className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition"
+              className="inline-flex items-center gap-2 bg-[#0F3D2E] hover:bg-[#1C7C54] active:scale-[0.98] text-white font-bold px-5 py-2.5 rounded-lg text-xs sm:text-sm transition shadow-xs"
             >
-              <CalendarPlus className="w-4 h-4" />
+              <CalendarPlus className="w-4 h-4 text-[#2FA36B]" />
               Book First Pickup
             </Link>
           </div>

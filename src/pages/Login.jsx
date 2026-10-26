@@ -111,37 +111,37 @@ export default function Login() {
 
   return (
     <div className="max-w-md mx-auto my-12 px-4">
-      <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl shadow-slate-100 p-8">
+      <div className="bg-white rounded-xl border border-[#D6E5DC] shadow-[0_1px_3px_rgba(15,61,46,0.06)] p-8">
         
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-inner">
-            {isSignUp ? <UserPlus className="w-7 h-7" /> : <LogIn className="w-7 h-7" />}
+          <div className="w-12 h-12 bg-[#E7F3EC] text-[#0F3D2E] rounded-xl flex items-center justify-center mx-auto mb-3 border border-[#D6E5DC]">
+            {isSignUp ? <UserPlus className="w-6 h-6" /> : <LogIn className="w-6 h-6" />}
           </div>
-          <h1 className="text-2xl font-black text-slate-800">
-            {isSignUp ? 'Create EcoCycle Account' : 'Welcome Back'}
+          <h1 className="text-2xl font-display font-bold text-[#0F3D2E]">
+            {isSignUp ? 'Create EcoCycle Account' : 'Civic Platform Sign In'}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-[#52665A] mt-1.5">
             {isSignUp
-              ? 'Join our community to schedule pickups and track your impact'
-              : 'Log in to manage your e-waste requests and locate centers'}
+              ? 'Join municipal collection efforts to schedule pickups and track certified recycling'
+              : 'Log in to manage community aggregations and inspect facility registries'}
           </p>
         </div>
 
         {/* Feedback Alerts */}
         {errorMessage && (
-          <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 flex items-start gap-3 text-rose-700 text-sm">
-            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-rose-500" />
+          <div className="mb-6 p-4 rounded-lg bg-rose-50 border border-rose-200 flex items-start gap-3 text-rose-800 text-sm">
+            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-rose-600" />
             <div>
               <p className="font-semibold">Authentication Error</p>
-              <p className="text-xs mt-0.5">{errorMessage}</p>
+              <p className="text-xs mt-0.5 text-rose-700">{errorMessage}</p>
             </div>
           </div>
         )}
 
         {successMessage && (
-          <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-start gap-3 text-emerald-700 text-sm">
-            <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5 text-emerald-500" />
+          <div className="mb-6 p-4 rounded-lg bg-[#E7F3EC] border border-[#D6E5DC] flex items-start gap-3 text-[#0F3D2E] text-sm">
+            <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5 text-[#1C7C54]" />
             <p className="font-semibold">{successMessage}</p>
           </div>
         )}
@@ -151,11 +151,11 @@ export default function Login() {
           
           {/* Email */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-mono uppercase tracking-wider text-[#1E2922] mb-1.5">
               Email Address
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#52665A]">
                 <Mail className="w-4 h-4" />
               </div>
               <input
@@ -163,19 +163,19 @@ export default function Login() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@student.edu"
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition"
+                placeholder="you@institution.edu"
+                className="w-full pl-10 pr-4 py-2.5 bg-[#F8FAF8] border border-[#D6E5DC] rounded-lg text-sm text-[#1E2922] focus:outline-none focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white transition-colors"
               />
             </div>
           </div>
 
           {/* Password */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-mono uppercase tracking-wider text-[#1E2922] mb-1.5">
               Password
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#52665A]">
                 <KeyRound className="w-4 h-4" />
               </div>
               <input
@@ -185,59 +185,59 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition"
+                className="w-full pl-10 pr-4 py-2.5 bg-[#F8FAF8] border border-[#D6E5DC] rounded-lg text-sm text-[#1E2922] focus:outline-none focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white transition-colors"
               />
             </div>
-            <span className="text-[11px] text-slate-400 mt-1 block">Minimum 6 characters</span>
+            <span className="text-xs text-[#52665A] mt-1 block">Minimum 6 characters</span>
           </div>
 
           {/* Role selector (visible during Sign Up) */}
           {isSignUp && (
-            <div className="pt-2 border-t border-slate-100">
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+            <div className="pt-2 border-t border-[#D6E5DC]">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#1E2922] mb-2">
                 Account Role
               </label>
               <div className="grid grid-cols-2 gap-3">
                 <button
                   type="button"
                   onClick={() => setRole('user')}
-                  className={`py-2 px-3 text-xs font-bold rounded-xl border text-center transition ${
+                  className={`py-2 px-3 text-xs font-semibold rounded-lg border text-center transition-colors ${
                     role === 'user'
-                      ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
-                      : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
+                      ? 'bg-[#0F3D2E] text-white border-[#0F3D2E]'
+                      : 'bg-[#F8FAF8] text-[#52665A] border-[#D6E5DC] hover:bg-[#E7F3EC]'
                   }`}
                 >
-                  Regular User
+                  Citizen Donor
                 </button>
                 <button
                   type="button"
                   onClick={() => setRole('admin')}
-                  className={`py-2 px-3 text-xs font-bold rounded-xl border text-center transition ${
+                  className={`py-2 px-3 text-xs font-semibold rounded-lg border text-center transition-colors ${
                     role === 'admin'
-                      ? 'bg-amber-600 text-white border-amber-600 shadow-sm'
-                      : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
+                      ? 'bg-[#D97706] text-white border-[#D97706]'
+                      : 'bg-[#F8FAF8] text-[#52665A] border-[#D6E5DC] hover:bg-[#E7F3EC]'
                   }`}
                 >
-                  Admin / Facility
+                  Facility Admin
                 </button>
               </div>
 
               {/* If Admin selected, prompt for demo passcode */}
               {role === 'admin' && (
-                <div className="mt-3 p-3 bg-amber-50 rounded-xl border border-amber-200 space-y-1.5">
-                  <div className="flex items-center gap-1.5 text-amber-800 text-xs font-semibold">
+                <div className="mt-3 p-3 bg-[#FFF8E7] rounded-lg border border-[#F2B134]/40 space-y-1.5">
+                  <div className="flex items-center gap-1.5 text-[#D97706] text-xs font-semibold">
                     <Shield className="w-3.5 h-3.5" />
-                    <span>Demo Admin Passcode:</span>
+                    <span>Demo Facility Passcode:</span>
                   </div>
                   <input
                     type="text"
                     value={adminPasscode}
                     onChange={(e) => setAdminPasscode(e.target.value)}
                     placeholder="Enter ECOADMIN2025"
-                    className="w-full px-3 py-1.5 bg-white border border-amber-300 rounded-lg text-xs focus:ring-2 focus:ring-amber-500 focus:outline-none"
+                    className="w-full px-3 py-1.5 bg-white border border-[#D6E5DC] rounded-md text-xs focus:ring-2 focus:ring-[#D97706] focus:outline-none"
                   />
-                  <p className="text-[10px] text-amber-700">
-                    Use <strong className="font-mono bg-amber-100 px-1 py-0.5 rounded">ECOADMIN2025</strong> for demo / college evaluation.
+                  <p className="text-xs text-[#B45309]">
+                    Evaluation demo passcode: <strong className="font-mono bg-[#FFFBEB] px-1 py-0.5 rounded border border-[#F2B134]/30">ECOADMIN2025</strong>
                   </p>
                 </div>
               )}
@@ -248,12 +248,12 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full mt-4 flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-200 transition duration-150"
+            className="w-full mt-4 flex items-center justify-center gap-2 bg-[#0F3D2E] hover:bg-[#1C7C54] active:bg-[#0A291E] disabled:opacity-60 text-white font-medium py-2.5 rounded-lg shadow-[0_1px_2px_rgba(15,61,46,0.06)] transition-colors text-sm"
           >
             {loading ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Processing...</span>
+                <span>Authenticating...</span>
               </>
             ) : (
               <span>{isSignUp ? 'Create My Account' : 'Sign In to EcoCycle'}</span>
@@ -262,17 +262,17 @@ export default function Login() {
         </form>
 
         {/* Switch between Sign In / Sign Up */}
-        <div className="mt-6 text-center text-xs text-slate-500">
+        <div className="mt-6 text-center text-xs text-[#52665A]">
           {isSignUp ? (
             <p>
-              Already have an account?{' '}
+              Already registered?{' '}
               <button
                 type="button"
                 onClick={() => {
                   setIsSignUp(false);
                   setErrorMessage('');
                 }}
-                className="font-bold text-emerald-600 hover:underline"
+                className="font-semibold text-[#0F3D2E] hover:underline ml-1"
               >
                 Sign In
               </button>
@@ -286,7 +286,7 @@ export default function Login() {
                   setIsSignUp(true);
                   setErrorMessage('');
                 }}
-                className="font-bold text-emerald-600 hover:underline"
+                className="font-semibold text-[#0F3D2E] hover:underline ml-1"
               >
                 Create Account
               </button>

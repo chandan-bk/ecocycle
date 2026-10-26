@@ -5,8 +5,8 @@ import { sendBookingConfirmationEmail } from '../lib/emailService';
 import { Calendar, Package, MapPin, Hash, CheckCircle2, AlertCircle, Loader2, ArrowRight, ShieldCheck } from 'lucide-react';
 
 /**
- * SchedulePickup Page
- * Allows authenticated users to schedule an e-waste doorstep pickup.
+ * SchedulePickup Page (Elevated via Impeccable Design System)
+ * High-craft citizen booking portal with advance validation and zero AI slop.
  */
 export default function SchedulePickup() {
   const [itemType, setItemType] = useState('Smartphones & Tablets');
@@ -42,7 +42,6 @@ export default function SchedulePickup() {
     e.preventDefault();
     setErrorMessage('');
 
-    // Input validation
     if (!address.trim()) {
       setErrorMessage('Please provide a complete pickup address.');
       return;
@@ -106,30 +105,29 @@ export default function SchedulePickup() {
     <div className="max-w-2xl mx-auto my-10 px-4">
       
       {/* Title */}
-      <div className="text-center mb-8">
-        <div className="inline-flex p-3 bg-emerald-100 text-emerald-700 rounded-2xl mb-3 shadow-inner">
-          <Calendar className="w-8 h-8" />
-        </div>
-        <h1 className="text-3xl font-black text-slate-900">Schedule Doorstep Pickup</h1>
-        <p className="text-slate-600 text-sm mt-1 max-w-md mx-auto">
-          We collect your discarded electronic items right at your door and dispatch them to authorized recycling facilities.
+      <div className="text-center mb-8 space-y-2">
+        <h1 className="text-3xl font-extrabold text-[#0F3D2E] tracking-tight">
+          Schedule Doorstep Collection
+        </h1>
+        <p className="text-[#3F584C] text-sm max-w-md mx-auto leading-relaxed">
+          Surrender non-working, broken, or obsolete electronics directly from your home for certified demanufacturing.
         </p>
       </div>
 
-      {/* Success Notification Modal */}
+      {/* Success Notification */}
       {success ? (
-        <div className="bg-white rounded-3xl border border-emerald-200 p-8 shadow-xl text-center space-y-5">
-          <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
-            <CheckCircle2 className="w-10 h-10" />
+        <div className="bg-white rounded-2xl border border-[#D6E5DC] p-8 shadow-xs text-center space-y-5">
+          <div className="w-14 h-14 bg-[#E8F5EE] text-[#0F3D2E] rounded-full flex items-center justify-center mx-auto">
+            <CheckCircle2 className="w-8 h-8 text-[#2FA36B]" />
           </div>
-          <h2 className="text-2xl font-black text-slate-800">Pickup Scheduled Successfully!</h2>
-          <p className="text-sm text-slate-600 leading-relaxed max-w-md mx-auto">
-            Your e-waste collection request for <strong className="text-slate-800">{quantity}x {itemType}</strong> on <strong className="text-slate-800">{pickupDate}</strong> has been logged. Our logistics team will review and update the status shortly.
+          <h2 className="text-2xl font-bold text-[#0F3D2E]">Pickup Scheduled Successfully</h2>
+          <p className="text-sm text-[#3F584C] leading-relaxed max-w-md mx-auto">
+            Your e-waste collection request for <strong className="text-[#0F3D2E]">{quantity}x {itemType}</strong> on <strong className="text-[#0F3D2E]">{pickupDate}</strong> has been confirmed. Our team will arrive at your address and dispatch email status receipts.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
             <button
               onClick={() => navigate('/my-pickups')}
-              className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl transition"
+              className="inline-flex items-center justify-center gap-2 bg-[#0F3D2E] hover:bg-[#1C7C54] active:scale-[0.98] text-white font-bold px-6 py-3 rounded-xl transition"
             >
               <span>View In My Pickups</span>
               <ArrowRight className="w-4 h-4" />
@@ -141,7 +139,7 @@ export default function SchedulePickup() {
                 setQuantity(1);
                 setPickupDate('');
               }}
-              className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3 rounded-xl transition"
+              className="bg-[#EDF3EF] hover:bg-[#D6E5DC] text-[#0F3D2E] font-semibold px-6 py-3 rounded-xl transition"
             >
               Book Another Pickup
             </button>
@@ -149,21 +147,21 @@ export default function SchedulePickup() {
         </div>
       ) : (
         /* Form Card */
-        <div className="bg-white rounded-3xl border border-slate-200/90 shadow-lg p-6 sm:p-8">
+        <div className="bg-white rounded-2xl border border-[#D6E5DC] shadow-xs p-6 sm:p-8 space-y-6">
           
           {errorMessage && (
-            <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 flex items-start gap-3 text-rose-700 text-sm">
-              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+            <div className="p-4 rounded-xl bg-[#FEE2E2] border border-[#FECACA] flex items-start gap-3 text-[#991B1B] text-sm">
+              <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-[#DC2626]" />
               <span>{errorMessage}</span>
             </div>
           )}
 
           {/* Civic Model Assurance */}
-          <div className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-start gap-3 text-emerald-900 text-xs sm:text-sm">
-            <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+          <div className="p-4 rounded-xl bg-[#E8F5EE] border border-[#B4CFC1] flex items-start gap-3 text-[#12261D] text-xs sm:text-sm">
+            <ShieldCheck className="w-5 h-5 text-[#2FA36B] shrink-0 mt-0.5" />
             <div>
-              <strong className="text-emerald-950 font-bold block mb-0.5">100% Free Civic Service:</strong>
-              As a non-profit community initiative, doorstep pickups are completely free. Obsolete or dead devices are safely collected and routed to CPCB/KSPCB certified recyclers for zero-landfill processing.
+              <strong className="text-[#0F3D2E] font-bold block mb-0.5">100% Free Civic Service:</strong>
+              As an open civic initiative, doorstep pickups are completely free of charge. Collected items are aggregated for government-certified CPCB/KSPCB dismantling facilities.
             </div>
           </div>
 
@@ -171,17 +169,17 @@ export default function SchedulePickup() {
             
             {/* Item Category Selection */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                E-Waste Item Category
+              <label className="block text-xs font-bold text-[#0F3D2E] uppercase tracking-wider mb-2">
+                E-Waste Item Stream
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#6B8477]">
                   <Package className="w-4 h-4" />
                 </div>
                 <select
                   value={itemType}
                   onChange={(e) => setItemType(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition cursor-pointer"
+                  className="w-full pl-10 pr-4 py-2.5 bg-[#F8FAF8] border border-[#D6E5DC] rounded-xl text-sm text-[#12261D] focus:outline-none focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white transition cursor-pointer"
                 >
                   {itemCategories.map((cat) => (
                     <option key={cat} value={cat}>
@@ -194,11 +192,11 @@ export default function SchedulePickup() {
 
             {/* Quantity */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-[#0F3D2E] uppercase tracking-wider mb-2">
                 Estimated Quantity (Units / Devices)
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#6B8477]">
                   <Hash className="w-4 h-4" />
                 </div>
                 <input
@@ -208,18 +206,18 @@ export default function SchedulePickup() {
                   required
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition"
+                  className="w-full pl-10 pr-4 py-2.5 bg-[#F8FAF8] border border-[#D6E5DC] rounded-xl text-sm text-[#12261D] focus:outline-none focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white transition"
                 />
               </div>
             </div>
 
             {/* Pickup Date */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-[#0F3D2E] uppercase tracking-wider mb-2">
                 Preferred Pickup Date
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#6B8477]">
                   <Calendar className="w-4 h-4" />
                 </div>
                 <input
@@ -228,21 +226,21 @@ export default function SchedulePickup() {
                   min={minDateStr}
                   value={pickupDate}
                   onChange={(e) => setPickupDate(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition cursor-pointer"
+                  className="w-full pl-10 pr-4 py-2.5 bg-[#F8FAF8] border border-[#D6E5DC] rounded-xl text-sm text-[#12261D] focus:outline-none focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white transition cursor-pointer"
                 />
               </div>
-              <p className="text-[11px] text-slate-400 mt-1">
-                Pickups must be scheduled at least 1 day in advance.
+              <p className="text-xs text-[#6B8477] mt-1.5">
+                Logistics requires booking at least 1 day in advance.
               </p>
             </div>
 
             {/* Doorstep Address */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-bold text-[#0F3D2E] uppercase tracking-wider mb-2">
                 Doorstep Pickup Address
               </label>
               <div className="relative">
-                <div className="absolute top-3 left-3.5 pointer-events-none text-slate-400">
+                <div className="absolute top-3 left-3.5 pointer-events-none text-[#6B8477]">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <textarea
@@ -251,29 +249,29 @@ export default function SchedulePickup() {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="Apartment/Flat No, Street Name, Landmark, City & PIN Code"
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition"
+                  className="w-full pl-10 pr-4 py-2.5 bg-[#F8FAF8] border border-[#D6E5DC] rounded-xl text-sm text-[#12261D] focus:outline-none focus:ring-2 focus:ring-[#0F3D2E] focus:bg-white transition"
                 />
               </div>
             </div>
 
             {/* Safety & Compliance Note */}
-            <div className="bg-emerald-50/70 border border-emerald-100 rounded-xl p-3.5 text-xs text-emerald-800 leading-relaxed">
-              💡 <strong>Eco-Tip:</strong> Please remove external SIM cards and backup personal files before handing over digital storage devices.
+            <div className="bg-[#EDF3EF] border border-[#D6E5DC] rounded-xl p-3.5 text-xs text-[#3F584C] leading-relaxed">
+              💡 <strong>Data Privacy Reminder:</strong> Please back up files and factory-erase flash storage before handing over digital media.
             </div>
 
             {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-200 transition duration-150"
+              className="w-full flex items-center justify-center gap-2 bg-[#0F3D2E] hover:bg-[#1C7C54] active:scale-[0.98] disabled:opacity-60 text-white font-bold py-3.5 rounded-xl transition duration-150 shadow-xs"
             >
               {loading ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />
-                  <span>Submitting Request...</span>
+                  <span>Submitting Collection Request...</span>
                 </>
               ) : (
-                <span>Confirm & Schedule Pickup</span>
+                <span>Confirm & Schedule Free Pickup</span>
               )}
             </button>
 

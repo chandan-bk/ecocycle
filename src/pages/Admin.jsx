@@ -278,13 +278,13 @@ export default function Admin() {
       {/* Admin Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase mb-2">
+          <div className="text-xs font-mono uppercase tracking-widest text-[#D97706] mb-2 flex items-center gap-1.5">
             <ShieldCheck className="w-3.5 h-3.5" />
-            Administrative Portal
+            Operations Command & Registry Audit
           </div>
-          <h1 className="text-3xl font-black text-slate-900">E-Waste Operations Management</h1>
-          <p className="text-slate-500 text-sm mt-0.5">
-            Oversee all scheduled pickups and manage verified drop-off collection centers.
+          <h1 className="text-3xl font-display font-bold text-[#0F3D2E] tracking-tight">E-Waste Operations Management</h1>
+          <p className="text-[#52665A] text-sm mt-0.5">
+            Oversee door-to-facility transit manifests and maintain verified civic recycler registries.
           </p>
         </div>
 
@@ -293,10 +293,10 @@ export default function Admin() {
           {activeTab === 'centers' && (
             <button
               onClick={handleOpenAddCenter}
-              className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-md transition"
+              className="inline-flex items-center gap-2 bg-[#0F3D2E] hover:bg-[#1C7C54] text-white font-semibold px-4 py-2.5 rounded-lg text-xs shadow-[0_1px_2px_rgba(15,61,46,0.06)] transition-colors"
             >
               <Plus className="w-4 h-4" />
-              Add New Center
+              Add Facility Center
             </button>
           )}
           <button
@@ -304,52 +304,52 @@ export default function Admin() {
               fetchAllPickups();
               fetchAllCenters();
             }}
-            className="p-2.5 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl transition"
-            title="Refresh Data"
+            className="p-2.5 bg-white border border-[#D6E5DC] hover:bg-[#F8FAF8] text-[#0F3D2E] rounded-lg transition-colors"
+            title="Refresh Manifest"
           >
-            <RefreshCw className="w-4 h-4" />
+            <RefreshCw className="w-4 h-4 text-[#1C7C54]" />
           </button>
         </div>
       </div>
 
       {/* Notifications */}
       {successMsg && (
-        <div className="p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+        <div className="p-3.5 bg-[#E7F3EC] border border-[#D6E5DC] text-[#0F3D2E] rounded-lg text-sm flex items-center gap-2 font-medium">
+          <CheckCircle2 className="w-4 h-4 text-[#1C7C54]" />
           <span>{successMsg}</span>
         </div>
       )}
 
       {errorMsg && (
-        <div className="p-3.5 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl text-sm flex items-center gap-2">
+        <div className="p-3.5 bg-rose-50 border border-rose-200 text-rose-800 rounded-lg text-sm flex items-center gap-2 font-medium">
           <AlertCircle className="w-4 h-4 text-rose-600" />
           <span>{errorMsg}</span>
         </div>
       )}
 
       {/* Main Tabs */}
-      <div className="flex border-b border-slate-200 gap-4">
+      <div className="flex border-b border-[#D6E5DC] gap-6">
         <button
           onClick={() => setActiveTab('pickups')}
-          className={`pb-3 font-bold text-sm sm:text-base border-b-2 flex items-center gap-2 transition ${
+          className={`pb-3 font-semibold text-sm sm:text-base border-b-2 flex items-center gap-2 transition-colors ${
             activeTab === 'pickups'
-              ? 'border-emerald-600 text-emerald-700'
-              : 'border-transparent text-slate-500 hover:text-slate-800'
+              ? 'border-[#0F3D2E] text-[#0F3D2E]'
+              : 'border-transparent text-[#52665A] hover:text-[#0F3D2E]'
           }`}
         >
           <Package className="w-4 h-4" />
-          All Pickups ({pickups.length})
+          Civic Pickups ({pickups.length})
         </button>
         <button
           onClick={() => setActiveTab('centers')}
-          className={`pb-3 font-bold text-sm sm:text-base border-b-2 flex items-center gap-2 transition ${
+          className={`pb-3 font-semibold text-sm sm:text-base border-b-2 flex items-center gap-2 transition-colors ${
             activeTab === 'centers'
-              ? 'border-emerald-600 text-emerald-700'
-              : 'border-transparent text-slate-500 hover:text-slate-800'
+              ? 'border-[#0F3D2E] text-[#0F3D2E]'
+              : 'border-transparent text-[#52665A] hover:text-[#0F3D2E]'
           }`}
         >
           <MapPin className="w-4 h-4" />
-          Collection Centers ({centers.length})
+          Recycler Facilities ({centers.length})
         </button>
       </div>
 
@@ -358,15 +358,15 @@ export default function Admin() {
         <div className="space-y-6">
           
           {/* Pickups Filters */}
-          <div className="flex flex-col sm:flex-row gap-3 items-center justify-between bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <div className="flex flex-col sm:flex-row gap-3 items-center justify-between bg-white p-4 rounded-xl border border-[#D6E5DC] shadow-[0_1px_3px_rgba(15,61,46,0.04)]">
             <div className="relative w-full sm:w-72">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+              <Search className="w-4 h-4 text-[#52665A] absolute left-3 top-3" />
               <input
                 type="text"
-                placeholder="Search user email or address..."
+                placeholder="Search citizen email or address..."
                 value={pickupSearch}
                 onChange={(e) => setPickupSearch(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full pl-9 pr-3 py-2 bg-[#F8FAF8] border border-[#D6E5DC] rounded-lg text-xs sm:text-sm text-[#1E2922] focus:outline-none focus:ring-2 focus:ring-[#0F3D2E]"
               />
             </div>
 
@@ -375,10 +375,10 @@ export default function Admin() {
                 <button
                   key={st}
                   onClick={() => setPickupStatusFilter(st)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize transition ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-colors ${
                     pickupStatusFilter === st
-                      ? 'bg-slate-900 text-white'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      ? 'bg-[#0F3D2E] text-white'
+                      : 'bg-[#F8FAF8] text-[#52665A] border border-[#D6E5DC] hover:bg-[#E7F3EC]'
                   }`}
                 >
                   {st}
@@ -388,13 +388,13 @@ export default function Admin() {
           </div>
 
           {loadingPickups ? (
-            <div className="min-h-[30vh] flex flex-col items-center justify-center text-emerald-700">
+            <div className="min-h-[30vh] flex flex-col items-center justify-center text-[#0F3D2E]">
               <Loader2 className="w-8 h-8 animate-spin mb-2" />
-              <p className="text-xs text-slate-500">Loading pickups database...</p>
+              <p className="text-xs text-[#52665A]">Accessing central pickup registry...</p>
             </div>
           ) : filteredPickups.length === 0 ? (
-            <div className="bg-white p-10 rounded-2xl border border-slate-200 text-center text-slate-500 text-sm">
-              No pickups found matching filter criteria.
+            <div className="bg-white p-10 rounded-xl border border-[#D6E5DC] text-center text-[#52665A] text-sm">
+              No aggregation logs found matching active criteria.
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -416,42 +416,42 @@ export default function Admin() {
       {activeTab === 'centers' && (
         <div className="space-y-6">
           {loadingCenters ? (
-            <div className="min-h-[30vh] flex flex-col items-center justify-center text-emerald-700">
+            <div className="min-h-[30vh] flex flex-col items-center justify-center text-[#0F3D2E]">
               <Loader2 className="w-8 h-8 animate-spin mb-2" />
-              <p className="text-xs text-slate-500">Loading collection centers...</p>
+              <p className="text-xs text-[#52665A]">Loading facility directory...</p>
             </div>
           ) : centers.length === 0 ? (
-            <div className="bg-white p-12 rounded-3xl border border-dashed border-slate-300 text-center space-y-4">
-              <MapPin className="w-10 h-10 text-slate-400 mx-auto" />
-              <h3 className="text-lg font-bold text-slate-800">No Collection Centers Added</h3>
-              <p className="text-xs text-slate-500">
-                Click "Add New Center" above to add your first recycling location.
+            <div className="bg-white p-12 rounded-xl border border-dashed border-[#D6E5DC] text-center space-y-4">
+              <MapPin className="w-10 h-10 text-[#52665A] mx-auto" />
+              <h3 className="text-base font-display font-bold text-[#0F3D2E]">No Certified Centers Registered</h3>
+              <p className="text-xs text-[#52665A]">
+                Click "Add Facility Center" above to add the first civic recycling facility.
               </p>
             </div>
           ) : (
-            <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-xl border border-[#D6E5DC] shadow-[0_1px_3px_rgba(15,61,46,0.04)] overflow-hidden">
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm text-slate-600">
-                  <thead className="bg-slate-50 border-b border-slate-200 text-xs uppercase text-slate-500 font-bold">
+                <table className="w-full text-left text-sm text-[#1E2922]">
+                  <thead className="bg-[#F8FAF8] border-b border-[#D6E5DC] text-xs font-mono uppercase text-[#52665A]">
                     <tr>
-                      <th className="px-6 py-4">Facility Name</th>
-                      <th className="px-6 py-4">City & Address</th>
-                      <th className="px-6 py-4">Coordinates (Lat, Lng)</th>
-                      <th className="px-6 py-4">Accepted Items</th>
-                      <th className="px-6 py-4 text-right">Actions</th>
+                      <th className="px-6 py-3.5">Facility Name</th>
+                      <th className="px-6 py-3.5">City & Address</th>
+                      <th className="px-6 py-3.5">Coordinates (Lat, Lng)</th>
+                      <th className="px-6 py-3.5">Accepted Waste Streams</th>
+                      <th className="px-6 py-3.5 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-[#D6E5DC]">
                     {centers.map((center) => (
-                      <tr key={center.id} className="hover:bg-slate-50/70 transition">
-                        <td className="px-6 py-4 font-bold text-slate-800">
+                      <tr key={center.id} className="hover:bg-[#F8FAF8] transition-colors">
+                        <td className="px-6 py-4 font-semibold text-[#0F3D2E]">
                           {center.name}
                         </td>
                         <td className="px-6 py-4">
-                          <div className="font-semibold text-slate-700">{center.city}</div>
-                          <div className="text-xs text-slate-500">{center.address}</div>
+                          <div className="font-medium text-[#1E2922]">{center.city}</div>
+                          <div className="text-xs text-[#52665A]">{center.address}</div>
                         </td>
-                        <td className="px-6 py-4 text-xs font-mono text-slate-500">
+                        <td className="px-6 py-4 text-xs font-mono text-[#52665A]">
                           {center.lat}, {center.lng}
                         </td>
                         <td className="px-6 py-4">
@@ -460,7 +460,7 @@ export default function Admin() {
                               center.accepts.map((item, idx) => (
                                 <span
                                   key={idx}
-                                  className="text-[10px] bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded"
+                                  className="text-xs font-mono bg-[#E7F3EC] text-[#0F3D2E] border border-[#D6E5DC] px-2 py-0.5 rounded"
                                 >
                                   {item}
                                 </span>
@@ -470,14 +470,14 @@ export default function Admin() {
                         <td className="px-6 py-4 text-right space-x-2">
                           <button
                             onClick={() => handleOpenEditCenter(center)}
-                            className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                            className="p-1.5 text-[#0F3D2E] hover:bg-[#E7F3EC] rounded-md transition-colors"
                             title="Edit Center"
                           >
                             <Edit3 className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleDeleteCenter(center.id)}
-                            className="p-1.5 text-rose-600 hover:bg-rose-50 rounded-lg transition"
+                            className="p-1.5 text-rose-600 hover:bg-rose-50 rounded-md transition-colors"
                             title="Delete Center"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -495,37 +495,37 @@ export default function Admin() {
 
       {/* CREATE / EDIT CENTER MODAL */}
       {isCenterModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl border border-slate-200 max-w-lg w-full p-6 shadow-2xl relative">
+        <div className="fixed inset-0 z-50 bg-[#0F3D2E]/40 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl border border-[#D6E5DC] max-w-lg w-full p-6 shadow-2xl relative">
             <button
               onClick={() => setIsCenterModalOpen(false)}
-              className="absolute top-5 right-5 text-slate-400 hover:text-slate-600"
+              className="absolute top-5 right-5 text-[#52665A] hover:text-[#1E2922]"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <h3 className="text-xl font-black text-slate-800 mb-4">
-              {editingCenter ? 'Edit Collection Center' : 'Add New Collection Center'}
+            <h3 className="text-xl font-display font-bold text-[#0F3D2E] mb-4">
+              {editingCenter ? 'Edit Certified Facility' : 'Register New Collection Facility'}
             </h3>
 
             <form onSubmit={handleCenterFormSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                  Center Name
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#1E2922] mb-1">
+                  Facility Name
                 </label>
                 <input
                   type="text"
                   required
                   value={centerForm.name}
                   onChange={(e) => setCenterForm({ ...centerForm, name: e.target.value })}
-                  placeholder="e.g. EcoCycle Whitefield Depot"
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500"
+                  placeholder="e.g. EcoCycle Whitefield Aggregation Depot"
+                  className="w-full px-3 py-2 bg-[#F8FAF8] border border-[#D6E5DC] rounded-lg text-sm text-[#1E2922] focus:ring-2 focus:ring-[#0F3D2E] focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#1E2922] mb-1">
                     City
                   </label>
                   <input
@@ -534,11 +534,11 @@ export default function Admin() {
                     value={centerForm.city}
                     onChange={(e) => setCenterForm({ ...centerForm, city: e.target.value })}
                     placeholder="Bangalore"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 bg-[#F8FAF8] border border-[#D6E5DC] rounded-lg text-sm text-[#1E2922] focus:ring-2 focus:ring-[#0F3D2E] focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#1E2922] mb-1">
                     Street Address
                   </label>
                   <input
@@ -546,15 +546,15 @@ export default function Admin() {
                     required
                     value={centerForm.address}
                     onChange={(e) => setCenterForm({ ...centerForm, address: e.target.value })}
-                    placeholder="Outer Ring Road"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500"
+                    placeholder="Outer Ring Road, Industrial Area"
+                    className="w-full px-3 py-2 bg-[#F8FAF8] border border-[#D6E5DC] rounded-lg text-sm text-[#1E2922] focus:ring-2 focus:ring-[#0F3D2E] focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#1E2922] mb-1">
                     Latitude
                   </label>
                   <input
@@ -564,11 +564,11 @@ export default function Admin() {
                     value={centerForm.lat}
                     onChange={(e) => setCenterForm({ ...centerForm, lat: e.target.value })}
                     placeholder="12.9716"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 bg-[#F8FAF8] border border-[#D6E5DC] rounded-lg text-sm text-[#1E2922] focus:ring-2 focus:ring-[#0F3D2E] focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label className="block text-xs font-mono uppercase tracking-wider text-[#1E2922] mb-1">
                     Longitude
                   </label>
                   <input
@@ -578,14 +578,14 @@ export default function Admin() {
                     value={centerForm.lng}
                     onChange={(e) => setCenterForm({ ...centerForm, lng: e.target.value })}
                     placeholder="77.5946"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 bg-[#F8FAF8] border border-[#D6E5DC] rounded-lg text-sm text-[#1E2922] focus:ring-2 focus:ring-[#0F3D2E] focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                  Accepted Items (Comma Separated)
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#1E2922] mb-1">
+                  Accepted Waste Streams (Comma Separated)
                 </label>
                 <input
                   type="text"
@@ -593,24 +593,24 @@ export default function Admin() {
                   value={centerForm.acceptsStr}
                   onChange={(e) => setCenterForm({ ...centerForm, acceptsStr: e.target.value })}
                   placeholder="Smartphones, Laptops, Batteries, Cables"
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3 py-2 bg-[#F8FAF8] border border-[#D6E5DC] rounded-lg text-sm text-[#1E2922] focus:ring-2 focus:ring-[#0F3D2E] focus:outline-none"
                 />
-                <span className="text-[11px] text-slate-400">Separate each category with a comma.</span>
+                <span className="text-xs text-[#52665A] mt-1 block">Separate each material category with a comma.</span>
               </div>
 
               <div className="pt-2 flex justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setIsCenterModalOpen(false)}
-                  className="px-4 py-2 border border-slate-200 rounded-xl text-sm text-slate-600 hover:bg-slate-50"
+                  className="px-4 py-2 border border-[#D6E5DC] rounded-lg text-sm text-[#52665A] hover:bg-[#F8FAF8] transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm shadow transition"
+                  className="px-5 py-2 bg-[#0F3D2E] hover:bg-[#1C7C54] text-white font-medium rounded-lg text-sm shadow-[0_1px_2px_rgba(15,61,46,0.06)] transition-colors"
                 >
-                  {editingCenter ? 'Save Changes' : 'Create Center'}
+                  {editingCenter ? 'Save Facility Changes' : 'Confirm Registration'}
                 </button>
               </div>
             </form>
